@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aula 06 - Vuejs do jeito ninja!</title>
+
+  <style media="screen">
+    .red {
+      color: red;
+    }
+    .green {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ titulo }}</h1>
+    <img
+      :src="imagem" 
+      :alt="'Vuejs is awesome!'"
+      :data-img-large="imagem"
+      style="width: 100vw;">
+
+      <p :class="classHtml">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id varius eros.</p>
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        titulo: "Aula 06 - Vuejs do jeito ninja!",
+        imagem: "https://mdbootstrap.com/img/Marketing/free/main/vue/mdb-vue-free.jpg",
+        classHtml: "green"
+      }
+    });
+  </script>
+</body>
+</html>
