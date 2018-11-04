@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aula 09 - Vuejs do jeito ninja!</title>
+  <title>Aula 10 - Vuejs do jeito ninja!</title>
 
   <!-- Add this to <head> -->
   <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
@@ -16,10 +16,7 @@
   <div id="app">
     <div class="container">
       <h1>{{ titulo }}</h1>
-
-      <ul>
-        <li v-for="user in users">{{user.name | truncate('10') }}</li>
-      </ul>
+      {{fullName}}
     </div>
   </div>
 
@@ -33,28 +30,39 @@
     var app = new Vue({
       el: "#app",
       data: {
-        titulo: "Aula 09 - Vuejs do jeito ninja!",
-        users: [
-          { name: "Jhon Snow" },
-          { name: "Tyrion Lannister" },
-          { name: "Daenerery Targaryen" }
-        ]
+        titulo: "Aula 10 - Vuejs do jeito ninja!",
+        firstName: "",
+        lastName: "",
+        // fullName: ""
       },
-      
-      filters: {
-        toUpperCase(str, param1, param2) {
-          return str.toUpperCase();
-        },
 
-        truncate(str, length) {
-          var output = str;
-          if (output.length > length) {
-            output = str.substring(0, length) + '...';
-          }
-          return output;
+      computed: {
+        fullName() {
+          return this.firstName + " " + this.lastName;
         }
       },
 
+      watch: {
+        firstName(newValue) {
+          this.updateUser();
+        },
+        lastName(newValue) {
+          this.updateUser();
+        },
+
+        // firstName(newValue) {
+        //   this.fullName = newValue + " " + this.lastName;
+        // },
+        // lastName(newValue) {
+        //   this.fullName = this.firstName + " " + newValue;
+        // },
+      },
+      
+      methods: {
+        updateUser() {
+          console.log("Usuário atualizado!");
+        },
+      }
     });
   </script>
 </body>
