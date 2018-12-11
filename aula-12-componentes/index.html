@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aula 11 - Vuejs do jeito ninja!</title>
+
+  <!-- Add this to <head> -->
+  <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <h1>{{ titulo }}</h1>
+      <menu-bar></menu-bar>
+      <menu-bar></menu-bar>
+      <menu-bar></menu-bar>
+    </div>
+  </div>
+
+  <template id="menu">
+    <ul>
+      <li>Item1</li>
+      <li>Item2</li>
+      <li>Item3</li>
+    </ul>
+  </template>
+
+  <script src="https://unpkg.com/vue"></script>
+
+  <!-- Add this after vue.js -->
+  <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+  <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+  <script>
+    Vue.component('menu-bar', {
+      template: "#menu"
+    });
+
+    var app = new Vue({
+      el: "#app",
+
+      data: {
+        titulo: "Aula 11 - Vuejs do jeito ninja!",
+      },
+    });
+  </script>
+</body>
+
+</html>
