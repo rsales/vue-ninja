@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aula 13 - Vuejs do jeito ninja!</title>
+  <title>Aula 14 - Vuejs do jeito ninja!</title>
 
   <!-- Add this to <head> -->
   <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
@@ -15,6 +15,8 @@
 <body>
   <div id="app">
     <navbar></navbar>
+    <br><br>
+    <menu-bar :items="[{label: 'A empresa'}, {label: 'Serviços'}]"></menu-bar>
   </div>
 
   <template id="nav">
@@ -25,24 +27,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <menu-bar></menu-bar>
+        <menu-bar :items="topNav" @emit-click="getLink"></menu-bar>
       </div>
     </nav>
   </template>
 
   <template id="menu">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+      <li class="nav-item" v-for="(item, index) in items">
+        <a @click.stop.prevent="emitClick(index)" class="nav-link" href="#">{{ item.label }}</a>
       </li>
     </ul>
   </template>
@@ -55,10 +48,32 @@
 
   <script>
     Vue.component('navbar', {
-      template: "#nav"
+      template: "#nav",
+      data() {
+        return {
+          topNav: [{ label: 'Home' }, { label: 'Features' }, { label: 'Pricing' }, { label: 'Disabled' }]
+        }
+      },
+      methods: {
+        getLink(index) {
+          alert(this.topNav[index].label)
+        }
+      }
     });
     Vue.component('menu-bar', {
-      template: "#menu"
+      template: "#menu",
+      props: {
+        items: {
+          type: Array ,
+          requred: true,
+          default: []
+        },
+      },
+      methods: {
+        emitClick(index) {
+          this.$emit('emit-click', index);
+        }
+      }
     });
 
     var app = new Vue({
